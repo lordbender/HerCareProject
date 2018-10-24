@@ -17,9 +17,11 @@ namespace her_care.Pages
         }
         public async Task OnGet()
         {
+            // How to Search
+            var users = context.Tests.Where(x => x.Name == "Sean").OrderBy(x => x.Id);
+            var user = context.Tests.FirstOrDefault(x => x.Name == "Sean");
 
-            context.Tests.Where(x => x.Name == "Sean");
-            
+            //How to add New Data
             var m1 = new Test();
             m1.Name = "Some New Cool Thing";
             var models = context.Tests.Add(m1);

@@ -34,7 +34,7 @@ namespace her_care
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            var connectionString = "Server=tcp:hercareproj.database.windows.net:1433;Database=HerCareDB;Persist Security Info=False;User ID={{USERNAME}};Password={{PASSWORD}};MultipleActiveResultSets=False;Encrypt=true;TrustServerCertificate=False;";
+            var connectionString = "Server=tcp:hercareproj.database.windows.net:1433;Database=HerCareDB;Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=true;TrustServerCertificate=False;";
             Console.WriteLine($"connectionString => {connectionString}");
             var username = Environment.GetEnvironmentVariable("your_username");
             var password = Environment.GetEnvironmentVariable("your_password");
