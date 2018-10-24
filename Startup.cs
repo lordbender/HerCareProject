@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
+using her_care.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,6 +34,17 @@ namespace her_care
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            var connectionString = "Server=tcp:hercareproj.database.windows.net:1433;Database=HerCareDB;Persist Security Info=False;User ID={{USERNAME}};Password={{PASSWORD}};MultipleActiveResultSets=False;Encrypt=true;TrustServerCertificate=False;";
+            Console.WriteLine($"connectionString => {connectionString}");
+            var username = Environment.GetEnvironmentVariable("your_username");
+            var password = Environment.GetEnvironmentVariable("your_password");
+
+            connectionString.Replace("{your_username}", username);
+            connectionString.Replace("{your_password}", password);
+
+            services.AddDbContext<HerCareContext>(options =>
+                options.UseSqlServer(connectionString));
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -48,7 +62,8 @@ namespace her_care
                 app.UseHsts();
             }
 
-           //  app.UseHttpsRedirection();
+
+            //  app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
