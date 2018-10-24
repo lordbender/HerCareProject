@@ -17,6 +17,9 @@ namespace her_care.Pages
         }
         public async Task OnGet()
         {
+
+            context.Tests.Where(x => x.Name == "Sean");
+            
             var m1 = new Test();
             m1.Name = "Some New Cool Thing";
             var models = context.Tests.Add(m1);
