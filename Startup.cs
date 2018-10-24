@@ -34,13 +34,10 @@ namespace her_care
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            var connectionString = "Server=tcp:hercareproj.database.windows.net:1433;Database=HerCareDB;Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=true;TrustServerCertificate=False;";
-            Console.WriteLine($"connectionString => {connectionString}");
             var username = Environment.GetEnvironmentVariable("your_username");
             var password = Environment.GetEnvironmentVariable("your_password");
-
-            connectionString.Replace("{your_username}", username);
-            connectionString.Replace("{your_password}", password);
+            var connectionString = $"Server=tcp:hercareproj.database.windows.net,1433;Initial Catalog=HerCareDB;Persist Security Info=False;User ID={username};Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            Console.WriteLine($"connectionString => {connectionString}");
 
             services.AddDbContext<HerCareContext>(options =>
                 options.UseSqlServer(connectionString));
